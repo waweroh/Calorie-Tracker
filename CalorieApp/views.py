@@ -11,7 +11,8 @@ def index(request):
         consume.save()
         foods = Food.objects.all()  
 
-    else:    
+    else: 
         foods = Food.objects.all()
-    return render(request, 'index.html', {'foods':foods})
+    consumed_foods = Consumption.objects.filter(user=request.user)  # List of consumed food objects to be displayed on template
+    return render(request, 'index.html', {'foods':foods, 'consumed_foods':consumed_foods})
 
