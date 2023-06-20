@@ -1,19 +1,17 @@
-from django.shortcuts import render , get_object_or_404
-from .models import Person, Meal, Food, FoodItem
+from django.shortcuts import render 
+from .models import Food, Consumption
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    if request.method =="POST":
+        food_consumed = request.POST.get('food_consumed') #get data/food submitted by user in text not object
+        consume = Food.objects.get(name=food_consumed ) #get the food object
+        user = request.user #get the user selecting the food
+        consume = Consumption(user=user, food_consumed=consume)# the actual object
+        consume.save()
+        foods = Food.objects.all()  
 
-def person_detail(request, person_id):
-    person = get_object_or_404(Person, id=person_id)
-    return render(request, 'person.html', {'person': person})
+    else:    
+        foods = Food.objects.all()
+    return render(request, 'index.html', {'foods':foods})
 
-def meal_detail(request, meal_id):
-    meal = get_object_or_404(Meal, id=meal_id)
-    food_items = FoodItem.objects.filter(meal=meal)
-    return render(request, 'meal.html', {'meal': meal, 'food_items': food_items})
-
-def food_detail(request, food_id):
-    food = get_object_or_404(Food, id=food_id)
-    return render(request, 'food.html', {'food': food})
