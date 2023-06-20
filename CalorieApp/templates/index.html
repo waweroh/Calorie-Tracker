@@ -2,20 +2,59 @@
 
 
 {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 align-self-center">
+      <form method="POST">
+        <div class="form-group row">
+          {% csrf_token %}
+          <label class="col-md-2">
+            <b>Select Your Food</b>
+          </label>
+          <select class="col-md-6 form-control" name="food_consumed" id="food_consumed">
+            {% for food in foods %}
+            <option value="{{food.name}}">{{food.name}}</option>
+            {% endfor %}
+          </select>
+          <button class="btn btn-success" type="submit">Add</button>
+        </div>
+      </form>
 
-<form method="POST">
-  {% csrf_token %}
-  <select name="food_consumed" id="food_consumed">
-    {% for food in foods %}
-    <option value="{{food.name}}">{{food.name}}</option>
-    {% endfor %}
-  </select>
-  <button type="submit">Add</button>
-</form>
-{% for item in consumed_foods %}
-  {{item.food_consumed.name}} --> {{item.food_consumed.carbs}} --> {{item.food_consumed.protein}} --> {{item.food_consumed.fats}} --> {{item.food_consumed.calories}}<br>
-{% endfor %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <h4>Today's Consumption</h4>
+      </div>
 
+      <table id="table" class="table table-striped table-primary">
+        <tr class="bg-primary text-white">
+          <th>Food item</th>
+          <th>Carbs(gm)</th>
+          <th>Protein(gm)</th>
+          <th>Fats(gm)</th>
+          <th>Calories(Kcal)</th>
+        </tr>
+            {% for item in consumed_foods %}
+            <tr> <!--loop through the food items -->
+              <td>{{item.food_consumed.name}}</td>
+              <td>{{item.food_consumed.carbs}}</td>
+              <td>{{item.food_consumed.protein}}</td>
+              <td>{{item.food_consumed.fats}}</td>
+              <td>{{item.food_consumed.calories}}</td>
+
+            </tr>
+            {% endfor %}
+
+      </table>
+    </div>
+    <div class="col-md-5 offset-1">
+
+    </div>
+
+  </div>
+</div>
 
 
 
