@@ -2,6 +2,9 @@ from django.shortcuts import render , get_object_or_404
 from .models import Person, Meal, Food, FoodItem
 
 # Create your views here.
+def index(request):
+    return render(request, 'index.html')
+
 def person_detail(request, person_id):
     person = get_object_or_404(Person, id=person_id)
     return render(request, 'person.html', {'person': person})
