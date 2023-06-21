@@ -9,9 +9,11 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-import os
+
 from pathlib import Path
 from decouple import config,Csv
+import dj_database_url
+import os
 
 
 
@@ -102,6 +104,9 @@ WSGI_APPLICATION = 'CalorieTracker.wsgi.application'
 #         'PORT': '3306',
 #     }
 # }
+DATABASES = {
+    "default": dj_database_url.parse(os.environ.get('DATABASE_URL'))
+}
 
 
 
@@ -141,13 +146,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+MEDIA_URL = '/media/'
+# STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-MEDIA_URLS ='/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
