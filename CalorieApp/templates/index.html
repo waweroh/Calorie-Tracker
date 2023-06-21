@@ -3,6 +3,18 @@
 
 {% block content %}
 <div class="container">
+  <br><br><br>
+
+  <h4><b>Calories Goal</b></h4>
+  <br>
+  <div class="row">
+    <div class="col-md-9 offset-1">
+      <div class="progress">
+        <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+      </div>
+    </div>
+  </div>
+  <br>
   <div class="row">
     <div class="col-md-12 align-self-center">
       <form method="POST">
@@ -46,6 +58,13 @@
 
             </tr>
             {% endfor %}
+            <tr>
+              <td id="name"><b>Total</b></td>
+              <td id="total_Carbs"><b></b></td>
+              <td id="total_Protein"><b></b></td>
+              <td id="total_Fats"><b></b></td>
+              <td id="total_Calories"><b></b></td>
+            </tr>
 
       </table>
     </div>
@@ -55,6 +74,32 @@
 
   </div>
 </div>
+
+<!-- <script>getting access to tablel contents through js. -->
+<script>
+  var table = document.getElementById("table");
+  var carbs=0, protein=0, fats=0, calories=0;
+
+  // loop through the tables to get values
+  for(var i=1; i<table.rows.length-1; i++) {
+    console.log(table.rows[i].cells[4].innerHTML);
+    carbs += parseFloat(table.rows[i].cells[1].innerHTML)
+    carbs = Math.round(carbs);
+    protein += parseFloat(table.rows[i].cells[2].innerHTML)
+    protein = Math.round(protein);
+    fats += parseFloat(table.rows[i].cells[3].innerHTML)
+    fats = Math.round(fats);
+    calories += parseFloat(table.rows[i].cells[4].innerHTML)
+    calories = Math.round(calories);
+  }
+  console.log(calories);
+
+  document.getElementById("total_Carbs").innerHTML = '<b>' + carbs+'(gm)</b>';
+  document.getElementById("total_Protein").innerHTML = '<b>' + protein+'(gm)</b>';
+  document.getElementById("total_Fats").innerHTML = '<b>' +fats+'(gm)</b>';
+  document.getElementById("total_Calories").innerHTML = '<b>' +calories+'(Kcal)</b>';
+</script>
+
 
 
 
