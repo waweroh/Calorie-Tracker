@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'bootstrap4',
-    # 'django_browser_reload',
+    'django_browser_reload', 
 ]
 
 
