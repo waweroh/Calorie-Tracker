@@ -98,6 +98,10 @@
   document.getElementById("total_Protein").innerHTML = '<b>' + protein+'(gm)</b>';
   document.getElementById("total_Fats").innerHTML = '<b>' +fats+'(gm)</b>';
   document.getElementById("total_Calories").innerHTML = '<b>' +calories+'(Kcal)</b>';
+
+  // progress bar
+  var calPer = (calories/3000) * 100;
+  document.getElementsByClassName("progress-bar")[0].setAttribute("style","width:"+calPer+"%");
 </script>
 
 
